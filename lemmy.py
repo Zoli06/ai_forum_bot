@@ -2,6 +2,7 @@ import json
 import os
 
 from pythorhead import Lemmy
+from pythorhead.comment import Comment
 
 lemmy = Lemmy("https://lemmy.cs-z.hu")
 lemmy.log_in(os.environ['USERNAME'], os.environ['PASSWORD'])
@@ -47,3 +48,12 @@ def post(community_id, title, body):
     print("Post created")
 
     return post["post_view"]["post"]["id"]
+
+def comment(post_id, comment):
+    comment = lemmy.comment.create(
+        post_id=post_id,
+        content=comment.content
+    )
+
+    return comment["comment_view"]["comment"]["id"]
+
