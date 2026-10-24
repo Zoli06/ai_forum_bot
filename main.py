@@ -1,8 +1,12 @@
 import json
 
+from dotenv import load_dotenv
+
 from commands import COMMANDS, CommandPlan
 from gemini import gemini
+from lemmy import comment_to_post, comment_to_comment
 
+load_dotenv()
 
 def start():
 
@@ -30,7 +34,7 @@ def start():
 
     print(command_plan)
 
-start()
+comment_to_comment(20, 19, "dfksjbgffsdjikhbgv")
 
 # def create_post(community_id):
 #     interaction = gemini.interactions.create(

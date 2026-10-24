@@ -2,8 +2,10 @@ import os
 
 from google import genai
 
-from lemmy import lemmy
+from dotenv import load_dotenv
+
+load_dotenv()
 
 gemini = genai.Client(
-    api_key=os.environ['API_KEY']
+    api_key=os.getenv("API_KEY"),
 )

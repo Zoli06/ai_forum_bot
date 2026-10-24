@@ -14,7 +14,8 @@ class CommentToPost(BaseModel):
 
 
 class CommentToComment(BaseModel):
-    comment_id: str = Field(description="The id of the comment")
+    post_id: str = Field(description="The id of the post. You can retrieve it from the path.")
+    comment_id: str = Field(description="The id of the comment. You can retrieve it from the path.")
     content: str = Field(description="The text of the comment")
 
 

@@ -1,11 +1,14 @@
 import json
 import os
 
+from dotenv import load_dotenv
 from pythorhead import Lemmy
-from pythorhead.comment import Comment
+
+load_dotenv()
 
 lemmy = Lemmy("https://lemmy.cs-z.hu")
-lemmy.log_in(os.environ['USERNAME'], os.environ['PASSWORD'])
+print(os.getenv("PASSWORD"))
+lemmy.log_in(os.getenv("LEMMY_USERNAME"), os.getenv("LEMMY_PASSWORD"))
 print("Logged in")
 
 community_id = lemmy.discover_community("dead_internet")
@@ -49,11 +52,19 @@ def post(community_id, title, body):
 
     return post["post_view"]["post"]["id"]
 
-def comment(post_id, comment):
+def comment_to_post(post_id, comment):
     comment = lemmy.comment.create(
         post_id=post_id,
         content=comment.content
     )
 
     return comment["comment_view"]["comment"]["id"]
+
+def comment_to_comment(post_id, comment_id, comment):
+    comment = lemmy.comment.create(
+        post_id=post_id,
+        parent_id=comment_id,
+        content=comment
+    )
+
 
