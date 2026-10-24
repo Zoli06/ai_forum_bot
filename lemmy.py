@@ -42,7 +42,7 @@ def get_latest_posts(community_id):
             "comments": get_comments(post["post"]["id"])
         })
 
-def post(community_id, title, body):
+def post(title, body):
     post = lemmy.post.create(
         community_id,
         title,
@@ -65,6 +65,18 @@ def comment_to_comment(post_id, comment_id, comment):
         post_id=post_id,
         parent_id=comment_id,
         content=comment
+    )
+
+def vote_post(post_id, vote):
+    post = lemmy.post.like(
+        post_id,
+        score=1 if vote else -1
+    )
+
+def vote_comment(post_id, comment_id, vote):
+    comment = lemmy.comment.like(
+        comment_id,
+        score=1 if vote else -1
     )
 
 

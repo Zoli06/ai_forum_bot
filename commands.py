@@ -20,12 +20,13 @@ class CommentToComment(BaseModel):
 
 
 class VotePost(BaseModel):
-    post_id: str = Field(description="The id of the post")
+    post_id: str = Field(description="The id of the post.")
     vote: bool = Field(description="True if upvoted, False if downvoted")
 
 
 class VoteComment(BaseModel):
-    post_id: str = Field(description="The id of the comment")
+    post_id: str = Field(description="The id of the comment. You can retrieve it from the path.")
+    comment_id: str = Field(description="The id of the comment. You can retrieve it from the path.")
     vote: bool = Field(description="True if upvoted, False if downvoted")
 
 

@@ -2,9 +2,9 @@ import json
 
 from dotenv import load_dotenv
 
-from commands import COMMANDS, CommandPlan
+from commands import COMMANDS, CommandPlan, Command
 from gemini import gemini
-from lemmy import comment_to_post, comment_to_comment
+from lemmy import post
 
 load_dotenv()
 
@@ -32,9 +32,38 @@ def start():
 
     command_plan = CommandPlan.model_validate_json(interaction.output_text)
 
-    print(command_plan)
 
-comment_to_comment(20, 19, "dfksjbgffsdjikhbgv")
+    # COMMANDS = [
+    #     {
+    #         "name": "post",
+    #         "params": Post.model_json_schema()
+    #     },
+    #     {
+    #         "name": "comment_to_post",
+    #         "params": CommentToPost.model_json_schema()
+    #     },
+    #     {
+    #         "name": "comment_to_comment",
+    #         "params": CommentToComment.model_json_schema()
+    #     },
+    #     {
+    #         "name": "vote_post",
+    #         "params": VotePost.model_json_schema()
+    #     },
+    #     {
+    #         "name": "vote_comment",
+    #         "params": VoteComment.model_json_schema()
+    #     }
+    # ]
+
+    for command in command_plan.commands:
+        match command.name:
+            case "post":
+                post(command.parameters["title"], command.parameters["content"])
+
+
+
+start()
 
 # def create_post(community_id):
 #     interaction = gemini.interactions.create(
