@@ -37,3 +37,13 @@ def get_latest_posts(community_id):
             "score": post["counts"]["score"],
             "comments": get_comments(post["post"]["id"])
         })
+
+def post(community_id, title, body):
+    post = lemmy.post.create(
+        community_id,
+        title,
+        body=body
+    )
+    print("Post created")
+
+    return post["post_view"]["post"]["id"]
