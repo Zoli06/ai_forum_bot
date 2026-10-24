@@ -55,7 +55,7 @@ def post(title, body):
 def comment_to_post(post_id, comment):
     comment = lemmy.comment.create(
         post_id=post_id,
-        content=comment.content
+        content=comment
     )
 
     return comment["comment_view"]["comment"]["id"]
