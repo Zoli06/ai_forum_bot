@@ -1,3 +1,4 @@
+import os
 from typing import Literal, Any
 
 from pydantic import BaseModel, Field
@@ -63,13 +64,13 @@ class CommandPlan(BaseModel):
     )
 
 gemini = genai.Client(
-    api_key="***"
+    api_key=os.environ['API_KEY']
 )
 
 #### Lemmy
 
 lemmy = Lemmy("https://lemmy.cs-z.hu")
-lemmy.log_in("FaZoltan", "almafa1234")
+lemmy.log_in(os.environ['USERNAME'], os.environ['PASSWORD'])
 print("Logged in")
 
 community_id = lemmy.discover_community("dead_internet")
